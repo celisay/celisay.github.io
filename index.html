@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emmanuel Oloyede — Web Developer & Virtual Assistant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=Manrope:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#101633;
+  --indigo:#232F72;
+  --indigo-2:#3A4BB5;
+  --indigo-soft:#E8EBF9;
+  --paper:#FAF8F2;
+  --white:#FFFFFF;
+  --gold:#D9A62E;
+  --gold-deep:#A97B14;
+  --green:#2E7D5B;
+  --red:#C0392B;
+  --line:rgba(16,22,51,.14);
+  --shadow:0 10px 30px rgba(16,22,51,.10);
+  --radius:14px;
+  --disp:'Syne',sans-serif;
+  --body:'Manrope',sans-serif;
+  --mono:'Space Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);background:var(--paper);color:var(--ink);line-height:1.6;font-size:16px}
+img{max-width:100%;display:block}
+a{color:inherit}
+button{font-family:var(--body);cursor:pointer}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+.adire{
+  --c:rgba(217,166,46,.55);
+  background:
+    radial-gradient(circle at 25% 25%, var(--c) 2px, transparent 2.6px),
+    radial-gradient(circle at 75% 75%, var(--c) 2px, transparent 2.6px),
+    linear-gradient(45deg, transparent 46%, var(--c) 46%, var(--c) 54%, transparent 54%),
+    linear-gradient(-45deg, transparent 46%, var(--c) 46%, var(--c) 54%, transparent 54%);
+  background-size:36px 36px;
+}
+.adire-strip{height:14px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);opacity:.9}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-deep)}
+h1,h2,h3{font-family:var(--disp);line-height:1.12;letter-spacing:-.01em}
+h1{font-size:clamp(38px,6vw,68px);font-weight:800}
+h2{font-size:clamp(26px,3.6vw,40px);font-weight:700}
+h3{font-size:20px;font-weight:700}
+.lead{font-size:18px;color:rgba(16,22,51,.78);max-width:62ch}
+.section{padding:88px 0}
+.section.tight{padding:56px 0}
+.grid{display:grid;gap:24px}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:900px){.g3,.g4{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:620px){.g2,.g3,.g4{grid-template-columns:1fr}}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 24px;border-radius:999px;border:2px solid var(--ink);background:var(--ink);color:var(--paper);font-weight:700;font-size:15px;text-decoration:none;transition:transform .15s ease, background .15s ease}
+.btn:hover{transform:translateY(-2px);background:var(--indigo)}
+.btn.gold{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+.btn.gold:hover{background:var(--gold-deep);border-color:var(--gold-deep);color:var(--paper)}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:var(--paper)}
+.btn.sm{padding:9px 16px;font-size:13px}
+.nav{position:sticky;top:0;z-index:60;background:rgba(250,248,242,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:70px}
+.logo{font-family:var(--disp);font-weight:800;font-size:20px;text-decoration:none;display:flex;align-items:center;gap:10px}
+.logo-mark{width:34px;height:34px;border-radius:9px;background:var(--indigo);position:relative;overflow:hidden}
+.logo-mark::after{content:"";position:absolute;inset:0;background:
+  radial-gradient(circle at 30% 30%, var(--gold) 3px, transparent 3.5px),
+  radial-gradient(circle at 70% 70%, var(--gold) 3px, transparent 3.5px);background-size:17px 17px}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{text-decoration:none;font-weight:600;font-size:15px;color:rgba(16,22,51,.75)}
+.nav-links a:hover,.nav-links a.active{color:var(--ink)}
+.burger{display:none;background:none;border:none;font-size:26px;line-height:1}
+@media(max-width:820px){
+  .nav-links{display:none;position:absolute;top:70px;left:0;right:0;background:var(--paper);flex-direction:column;padding:24px;border-bottom:1px solid var(--line);gap:18px}
+  .nav-links.open{display:flex}
+  .burger{display:block}
+}
+.hero{position:relative;padding:96px 0 110px;overflow:hidden}
+.hero-pattern{position:absolute;inset:auto -60px -40px auto;width:420px;height:420px;border-radius:50%;opacity:.16;transform:rotate(8deg)}
+.hero .eyebrow{margin-bottom:16px;display:block}
+.hero h1 .accent{color:var(--indigo);position:relative}
+.hero h1 .accent::after{content:"";position:absolute;left:0;right:0;bottom:6px;height:12px;background:var(--gold);opacity:.35;z-index:-1}
+.hero-cta{display:flex;gap:14px;margin-top:32px;flex-wrap:wrap}
+.hero-stats{display:flex;gap:44px;margin-top:52px;flex-wrap:wrap}
+.hstat b{font-family:var(--disp);font-size:30px;display:block}
+.hstat span{font-size:13px;color:rgba(16,22,51,.6);font-family:var(--mono)}
+.card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow)}
+.card h3{margin-bottom:10px}
+.card p{color:rgba(16,22,51,.75);font-size:15px}
+.tagrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.tag{font-family:var(--mono);font-size:11px;padding:4px 10px;border-radius:999px;background:var(--indigo-soft);color:var(--indigo)}
+.proj{overflow:hidden;padding:0;display:flex;flex-direction:column;transition:transform .18s ease}
+.proj:hover{transform:translateY(-4px)}
+.proj-thumb{height:170px;display:flex;align-items:flex-end;padding:18px;color:var(--paper);font-family:var(--disp);font-weight:800;font-size:22px}
+.proj-body{padding:22px 24px 26px;display:flex;flex-direction:column;gap:10px;flex:1}
+.proj-body p{flex:1}
+.thumb-indigo{background:linear-gradient(135deg,var(--indigo),var(--ink))}
+.thumb-gold{background:linear-gradient(135deg,var(--gold-deep),var(--gold));color:var(--ink)}
+.thumb-green{background:linear-gradient(135deg,#1E5C43,var(--green))}
+.thumb-ink{background:linear-gradient(135deg,#0B1026,var(--indigo))}
+.proj-links{display:flex;gap:10px;margin-top:6px}
+.band{background:var(--ink);color:var(--paper)}
+.band .eyebrow{color:var(--gold)}
+.band .lead{color:rgba(250,248,242,.75)}
+.band .card{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.12);box-shadow:none}
+.band .card p{color:rgba(250,248,242,.72)}
+footer{background:var(--ink);color:rgba(250,248,242,.7);padding:44px 0;font-size:14px}
+.foot{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center}
+footer a{color:var(--gold)}
+.field{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
+.field label{font-weight:700;font-size:14px}
+.field input,.field select,.field textarea{font-family:var(--body);font-size:15px;padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;background:var(--white)}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--indigo);outline:none}
+.form-ok{display:none;background:#E7F4EE;border:1.5px solid var(--green);color:#1E5C43;padding:16px;border-radius:10px;font-weight:600;margin-top:12px}
+.form-ok.show{display:block}
+.err{color:var(--red);font-size:13px;display:none}
+.err.show{display:block}
+.page{display:none}
+.page.active{display:block;animation:fade .3s ease}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.demo-bar{position:sticky;top:0;z-index:70;background:var(--gold);color:var(--ink);font-family:var(--mono);font-size:12px;padding:9px 0}
+.demo-bar .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.demo-bar a{font-weight:700;text-decoration:none;border-bottom:2px solid var(--ink)}
+.es-nav{background:var(--white);border-bottom:1px solid var(--line);padding:16px 0}
+.es-nav .wrap{display:flex;justify-content:space-between;align-items:center}
+.es-brand{font-family:var(--disp);font-weight:800;font-size:22px;color:var(--indigo)}
+.es-hero{background:var(--indigo);color:var(--paper);padding:64px 0;position:relative;overflow:hidden}
+.es-hero .adire{position:absolute;inset:0;opacity:.08}
+.es-filters{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:20px;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:-42px;position:relative;box-shadow:var(--shadow)}
+@media(max-width:760px){.es-filters{grid-template-columns:1fr 1fr}}
+.es-card{padding:0;overflow:hidden;cursor:pointer}
+.es-img{height:150px;display:flex;align-items:center;justify-content:center;font-size:44px}
+.es-body{padding:18px 20px 22px}
+.es-price{font-family:var(--disp);font-weight:800;font-size:20px;color:var(--indigo)}
+.es-meta{font-size:13px;color:rgba(16,22,51,.6);margin:6px 0 4px}
+.badge{display:inline-block;font-family:var(--mono);font-size:10px;padding:3px 9px;border-radius:999px;background:var(--gold);color:var(--ink);font-weight:700;margin-bottom:8px}
+.badge.rent{background:var(--indigo-soft);color:var(--indigo)}
+.badge.short{background:#E7F4EE;color:#1E5C43}
+.modal{display:none;position:fixed;inset:0;z-index:90;background:rgba(16,22,51,.55);padding:24px;overflow:auto}
+.modal.open{display:flex;align-items:flex-start;justify-content:center}
+.modal-box{background:var(--paper);border-radius:var(--radius);max-width:560px;width:100%;padding:32px;position:relative;margin:auto}
+.modal-x{position:absolute;top:14px;right:16px;background:none;border:none;font-size:26px;line-height:1}
+.sh-nav{background:var(--ink);color:var(--paper);padding:16px 0}
+.sh-nav .wrap{display:flex;justify-content:space-between;align-items:center}
+.sh-brand{font-family:var(--disp);font-weight:800;font-size:22px;color:var(--gold)}
+.cart-btn{background:var(--gold);border:none;color:var(--ink);font-weight:800;border-radius:999px;padding:9px 18px;font-size:14px}
+.sh-hero{background:linear-gradient(135deg,var(--ink),var(--indigo));color:var(--paper);padding:64px 0;text-align:center;position:relative;overflow:hidden}
+.sh-hero .adire{position:absolute;inset:0;opacity:.1}
+.sh-card{padding:0;overflow:hidden}
+.sh-img{height:190px;display:flex;align-items:center;justify-content:center;font-size:56px}
+.sh-body{padding:18px 20px 22px}
+.sh-price{font-family:var(--disp);font-weight:800;font-size:19px}
+.drawer{position:fixed;top:0;right:-420px;width:min(400px,92vw);height:100vh;background:var(--white);z-index:95;box-shadow:-12px 0 40px rgba(16,22,51,.25);transition:right .25s ease;display:flex;flex-direction:column}
+.drawer.open{right:0}
+.drawer-head{padding:20px 22px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;font-family:var(--disp);font-weight:800}
+.drawer-items{flex:1;overflow:auto;padding:16px 22px}
+.d-item{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 0;border-bottom:1px dashed var(--line);font-size:14px}
+.d-item button{background:none;border:none;color:var(--red);font-weight:700}
+.drawer-foot{padding:20px 22px;border-top:1px solid var(--line)}
+.qty{display:inline-flex;align-items:center;gap:10px}
+.qty button{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--line);background:var(--white);font-weight:800}
+.ld-hero{background:var(--ink);color:var(--paper);padding:80px 0;text-align:center;position:relative;overflow:hidden}
+.ld-hero .adire{position:absolute;inset:0;opacity:.07}
+.countdown{display:flex;gap:14px;justify-content:center;margin:28px 0}
+.cd{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:14px 18px;min-width:82px}
+.cd b{font-family:var(--disp);font-size:30px;display:block}
+.cd span{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--gold)}
+.faq-item{border:1px solid var(--line);border-radius:12px;background:var(--white);margin-bottom:12px;overflow:hidden}
+.faq-q{width:100%;text-align:left;padding:18px 20px;background:none;border:none;font-weight:700;font-size:16px;display:flex;justify-content:space-between;align-items:center;font-family:var(--body)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .25s ease;padding:0 20px;color:rgba(16,22,51,.75);font-size:15px}
+.faq-item.open .faq-a{max-height:220px;padding-bottom:18px}
+.check{color:var(--green);font-weight:800;margin-right:8px}
+.db{display:grid;grid-template-columns:230px 1fr;min-height:640px;background:#F2F3F8}
+@media(max-width:820px){.db{grid-template-columns:1fr}}
+.db-side{background:var(--ink);color:rgba(250,248,242,.8);padding:24px 18px}
+.db-side .sh-brand{display:block;margin-bottom:26px}
+.db-link{display:flex;gap:10px;align-items:center;padding:11px 12px;border-radius:9px;font-size:14px;font-weight:600;cursor:pointer;border:none;background:none;color:inherit;width:100%;text-align:left;font-family:var(--body)}
+.db-link.active,.db-link:hover{background:rgba(217,166,46,.15);color:var(--gold)}
+.db-main{padding:28px}
+.db-stat{background:var(--white);border-radius:12px;padding:20px;border:1px solid var(--line)}
+.db-stat b{font-family:var(--disp);font-size:26px;display:block}
+.db-stat span{font-size:12px;font-family:var(--mono);color:rgba(16,22,51,.55)}
+.db-stat .up{color:var(--green);font-size:12px;font-weight:700}
+.db-panel{background:var(--white);border-radius:12px;padding:22px;border:1px solid var(--line);margin-top:22px}
+.db-panel h3{font-size:16px;margin-bottom:14px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{text-align:left;font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:rgba(16,22,51,.5);padding:10px 8px;border-bottom:1.5px solid var(--line)}
+td{padding:11px 8px;border-bottom:1px solid var(--line)}
+.pill{font-size:11px;font-weight:700;padding:3px 10px;border-radius:999px}
+.pill.ok{background:#E7F4EE;color:#1E5C43}
+.pill.pend{background:#FBF1DA;color:var(--gold-deep)}
+.pill.off{background:#FDE9E7;color:var(--red)}
+.chat{display:flex;flex-direction:column;height:300px}
+.chat-log{flex:1;overflow:auto;display:flex;flex-direction:column;gap:10px;padding:6px 2px}
+.msg{max-width:78%;padding:10px 14px;border-radius:14px;font-size:14px}
+.msg.in{background:#F2F3F8;align-self:flex-start;border-bottom-left-radius:4px}
+.msg.out{background:var(--indigo);color:var(--paper);align-self:flex-end;border-bottom-right-radius:4px}
+.chat-row{display:flex;gap:10px;margin-top:12px}
+.chat-row input{flex:1;padding:11px 14px;border:1.5px solid var(--line);border-radius:999px;font-family:var(--body)}
+.va-num{font-family:var(--mono);color:var(--gold-deep);font-size:13px;margin-bottom:8px}
+.quote{border-left:4px solid var(--gold);padding:6px 0 6px 20px;font-size:17px;font-style:italic;color:rgba(16,22,51,.8)}
+.quote b{display:block;font-style:normal;font-family:var(--mono);font-size:12px;margin-top:10px;color:var(--gold-deep)}
+</style>
+  </head>
+<body>
+<nav class="nav" id="mainNav">
+  <div class="wrap nav-inner">
+    <a href="#/" class="logo"><span class="logo-mark"></span>Emmanuel Oloyede</a>
+    <button class="burger" id="burger" aria-label="Open menu">☰</button>
+    <div class="nav-links" id="navLinks">
+      <a href="#/" data-nav="home">Home</a>
+      <a href="#/projects" data-nav="projects">Projects</a>
+      <a href="#/va" data-nav="va">VA Services</a>
+      <a href="#/contact" data-nav="contact">Contact</a>
+      <a href="#/contact" class="btn gold sm">Hire Me</a>
+    </div>
+  </div>
+</nav>
+
+<div class="demo-bar" id="demoBar" style="display:none">
+  <div class="wrap">
+    <span>◆ LIVE DEMO — built by Emmanuel Oloyede</span>
+    <a href="#/projects">← Back to portfolio</a>
+  </div>
+</div>
+
+<main>
+
+<section class="page" data-route="home">
+  <div class="hero">
+    <div class="adire hero-pattern"></div>
+    <div class="wrap">
+      <span class="eyebrow">Lagos, Nigeria · Emma-Visio Enterprises</span>
+      <h1>Websites that <span class="accent">sell</span>.<br>Support that <span class="accent">scales</span>.</h1>
+      <p class="lead" style="margin-top:22px">I'm Emmanuel — a web developer and virtual assistant with 8+ years building WordPress, WooCommerce and custom platforms for real estate, fashion and digital products. I build it, launch it, and run the back office too.</p>
+      <div class="hero-cta">
+        <a class="btn gold" href="#/projects">View live demos</a>
+        <a class="btn ghost" href="#/va">VA services</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hstat"><b>8+</b><span>YEARS BUILDING</span></div>
+        <div class="hstat"><b>3</b><span>BRANDS LAUNCHED</span></div>
+        <div class="hstat"><b>120+</b><span>LEADS MANAGED</span></div>
+        <div class="hstat"><b>2</b><span>APPS SHIPPED</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="adire adire-strip"></div>
+
+  <div class="section">
+    <div class="wrap">
+      <span class="eyebrow">What I do</span>
+      <h2 style="margin:10px 0 34px">Two skill sets, one hire</h2>
+      <div class="grid g2">
+        <div class="card">
+          <h3>🖥️ Web Development</h3>
+          <p>WordPress, WooCommerce &amp; Elementor builds, custom landing pages, e-commerce stores, real estate platforms, and full-stack work with Node.js and React. Fast, mobile-first, conversion-focused.</p>
+          <div class="tagrow"><span class="tag">WordPress</span><span class="tag">WooCommerce</span><span class="tag">Elementor</span><span class="tag">HTML/CSS/JS</span><span class="tag">React</span><span class="tag">Node.js</span><span class="tag">PHP</span></div>
+        </div>
+        <div class="card">
+          <h3>🗂️ Virtual Assistance</h3>
+          <p>Research &amp; reports, content calendars, lead and funnel management, document creation, email handling, and e-commerce store admin. ALX-certified, English-fluent, timezone-flexible.</p>
+          <div class="tagrow"><span class="tag">Research</span><span class="tag">Lead Management</span><span class="tag">Content Calendars</span><span class="tag">Docs &amp; SOPs</span><span class="tag">Meta Ads Support</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="band section">
+    <div class="wrap">
+      <span class="eyebrow">Featured work</span>
+      <h2 style="margin:10px 0 34px">Try the live demos</h2>
+      <div class="grid g4">
+        <div class="card"><h3>🏠 Real Estate Site</h3><p>Property listings with working filters and booking enquiries.</p><a class="btn gold sm" style="margin-top:14px" href="#/demo/estate">Open demo</a></div>
+        <div class="card"><h3>🛍️ Fashion Store</h3><p>E-commerce with a working cart, quantities and checkout.</p><a class="btn gold sm" style="margin-top:14px" href="#/demo/shop">Open demo</a></div>
+        <div class="card"><h3>🚀 Landing Page</h3><p>Conversion page with countdown, FAQ and opt-in form.</p><a class="btn gold sm" style="margin-top:14px" href="#/demo/landing">Open demo</a></div>
+        <div class="card"><h3>📊 Admin Dashboard</h3><p>Stats, live chart, searchable table and chat widget.</p><a class="btn gold sm" style="margin-top:14px" href="#/demo/dashboard">Open demo</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="wrap">
+      <span class="eyebrow">Kind words</span>
+      <h2 style="margin:10px 0 34px">What clients say</h2>
+      <div class="grid g2">
+        <div class="quote">"Emmanuel rebuilt our store and fixed problems two other developers gave up on. Sales enquiries doubled in the first month."<b>— E-COMMERCE CLIENT, LAGOS</b></div>
+        <div class="quote">"He doesn't just build the site — he handles the follow-up, the leads, the documents. It's like hiring a small team."<b>— PROPERTY CLIENT, KAVIGREEN CONSULT</b></div>
+      </div>
+      <div style="margin-top:48px;text-align:center">
+        <a class="btn" href="#/contact">Start a project →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="page" data-route="projects">
+  <div class="section">
+    <div class="wrap">
+      <span class="eyebrow">Portfolio</span>
+      <h2 style="margin:10px 0 8px">Projects &amp; live demos</h2>
+      <p class="lead" style="margin-bottom:38px">The first four are fully interactive demos built into this site — click around, filter, add to cart. The rest are real client and product builds.</p>
+      <div class="grid g2">
+        <div class="card proj"><div class="proj-thumb thumb-indigo">Lekki Haven 🏠</div><div class="proj-body"><h3>Real Estate &amp; Shortlets</h3><p>Listing site with city/type/price filters, property detail modals and a booking enquiry form. The pattern behind NigeriaBuy-style platforms.</p><div class="tagrow"><span class="tag">Listings</span><span class="tag">Filters</span><span class="tag">Booking form</span></div><div class="proj-links"><a class="btn sm gold" href="#/demo/estate">Live demo</a></div></div></div>
+        <div class="card proj"><div class="proj-thumb thumb-gold">Àdìrẹ &amp; Thread 🛍️</div><div class="proj-body"><h3>Fashion E-commerce</h3><p>Ankara fashion store with product grid, working cart drawer, quantity controls and checkout — the Today Clothier playbook.</p><div class="tagrow"><span class="tag">Cart</span><span class="tag">WooCommerce-style</span><span class="tag">Checkout</span></div><div class="proj-links"><a class="btn sm gold" href="#/demo/shop">Live demo</a></div></div></div>
+        <div class="card proj"><div class="proj-thumb thumb-ink">Freelance Launchpad 🚀</div><div class="proj-body"><h3>Conversion Landing Page</h3><p>Course-style sales page with live countdown timer, benefits list, FAQ accordion and opt-in form — built for Meta ads traffic.</p><div class="tagrow"><span class="tag">Funnel</span><span class="tag">Countdown</span><span class="tag">Opt-in</span></div><div class="proj-links"><a class="btn sm gold" href="#/demo/landing">Live demo</a></div></div></div>
+        <div class="card proj"><div class="proj-thumb thumb-green">PropDesk 📊</div><div class="proj-body"><h3>Admin Dashboard</h3><p>Property admin panel with revenue chart, stat cards, searchable bookings table and a live chat widget — modelled on my React dashboard work.</p><div class="tagrow"><span class="tag">Dashboard</span><span class="tag">Charts</span><span class="tag">Live chat</span></div><div class="proj-links"><a class="btn sm gold" href="#/demo/dashboard">Live demo</a></div></div></div>
+        <div class="card proj"><div class="proj-thumb thumb-indigo">NigeriaBuy 🇳🇬</div><div class="proj-body"><h3>Real Estate Platform + AI Agent</h3><p>Live production platform: property sales, shortlet bookings, and a WhatsApp AI agent (Node.js, Meta Cloud API, Claude API) with a React admin dashboard.</p><div class="tagrow"><span class="tag">WordPress</span><span class="tag">Node.js</span><span class="tag">WhatsApp API</span><span class="tag">React</span></div><div class="proj-links"><a class="btn sm ghost" href="https://nigeriabuy.com.ng" target="_blank" rel="noopener">Visit site ↗</a></div></div></div>
+        <div class="card proj"><div class="proj-thumb thumb-gold">Today Clothier 👗</div><div class="proj-body"><h3>Live Fashion Store</h3><p>Nigerian Ankara fashion e-commerce on WordPress/WooCommerce: full build, variation fixes, landing page redesign and lookbook carousel.</p><div class="tagrow"><span class="tag">WooCommerce</span><span class="tag">Elementor</span><span class="tag">Brand design</span></div><div class="proj-links"><a class="btn sm ghost" href="https://todayclothier.com" target="_blank" rel="noopener">Visit site ↗</a></div></div></div>
+        <div class="card proj"><div class="proj-thumb thumb-ink">Crypto DCA Bot 🤖</div><div class="proj-body"><h3>Automation / Python</h3><p>Paper-trading crypto DCA bot running on GitHub Actions with Telegram notifications — scheduling, API integration and alerting.</p><div class="tagrow"><span class="tag">Python</span><span class="tag">GitHub Actions</span><span class="tag">Telegram API</span></div><div class="proj-links"><a class="btn sm ghost" href="https://github.com/celisay" target="_blank" rel="noopener">GitHub ↗</a></div></div></div>
+        <div class="card proj"><div class="proj-thumb thumb-green">PDF Master 📱</div><div class="proj-body"><h3>Flutter Mobile App</h3><p>PDF toolkit app: view, merge, split, compress, image-to-PDF and e-signing, with a RevenueCat subscription paywall.</p><div class="tagrow"><span class="tag">Flutter</span><span class="tag">Dart</span><span class="tag">RevenueCat</span></div><div class="proj-links"><a class="btn sm ghost" href="#/contact">Ask about it</a></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="page" data-route="va">
+  <div class="section">
+    <div class="wrap">
+      <span class="eyebrow">Virtual Assistance</span>
+      <h2 style="margin:10px 0 8px">Your remote right hand</h2>
+      <p class="lead" style="margin-bottom:38px">ALX-certified Virtual Assistant with a developer's toolkit. I've run lead pipelines, content calendars and document workflows for my own brands and clients — here's what that looks like in practice.</p>
+      <div class="grid g3">
+        <div class="card"><div class="va-num">CASE 01</div><h3>Lead &amp; Funnel Management</h3><p>Captured and managed 120+ leads from Meta ads into a Telegram community with follow-up sequences and a purchase funnel via Selar — from ad click to sale.</p></div>
+        <div class="card"><div class="va-num">CASE 02</div><h3>Research &amp; Reports</h3><p>Produced decision-ready research reports on skilled-migration pathways (VETASSESS/ACS), market entry options and vendor comparisons, with sources and recommendations.</p></div>
+        <div class="card"><div class="va-num">CASE 03</div><h3>Content &amp; Social Calendars</h3><p>Built a 30-day multi-platform content calendar and diaspora-targeting strategy for a real estate brand, including post copy and a WhatsApp-first conversion flow.</p></div>
+        <div class="card"><div class="va-num">CASE 04</div><h3>Document Creation</h3><p>Professional tenant agreements, campaign flyers, ID cards, formatted ebooks and SOPs — clean, branded and ready to send.</p></div>
+        <div class="card"><div class="va-num">CASE 05</div><h3>E-commerce Store Admin</h3><p>Product uploads, variation fixes, order handling and landing page updates across two WooCommerce stores — the unglamorous work that keeps stores selling.</p></div>
+        <div class="card"><div class="va-num">CASE 06</div><h3>Ads &amp; Tracking Support</h3><p>Meta Pixel setup, event tracking and deduplication debugging, plus campaign asset production (video scripts, captions, creatives).</p></div>
+      </div>
+      <div class="card" style="margin-top:34px">
+        <h3>Tools I work in daily</h3>
+        <div class="tagrow"><span class="tag">Google Workspace</span><span class="tag">Notion</span><span class="tag">Canva</span><span class="tag">Meta Business Suite</span><span class="tag">WordPress</span><span class="tag">Telegram/WhatsApp Business</span><span class="tag">Selar</span><span class="tag">CapCut/ffmpeg</span><span class="tag">ChatGPT/Claude</span></div>
+      </div>
+      <div style="margin-top:40px;text-align:center"><a class="btn gold" href="#/contact">Request my VA rate card →</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="page" data-route="contact">
+  <div class="section">
+    <div class="wrap" style="max-width:760px">
+      <span class="eyebrow">Contact</span>
+      <h2 style="margin:10px 0 8px">Let's build something</h2>
+      <p class="lead" style="margin-bottom:34px">Tell me about your project — or message me directly on WhatsApp for a faster reply.</p>
+      <div class="card">
+        <form id="contactForm" novalidate>
+          <div class="field"><label for="cname">Your name</label><input id="cname" type="text" required><span class="err" data-err="cname">Please enter your name.</span></div>
+          <div class="field"><label for="cemail">Email</label><input id="cemail" type="email" required><span class="err" data-err="cemail">Please enter a valid email.</span></div>
+          <div class="field"><label for="ctype">What do you need?</label>
+            <select id="ctype"><option>Website build</option><option>E-commerce store</option><option>Landing page / funnel</option><option>Virtual assistant support</option><option>Something else</option></select>
+          </div>
+          <div class="field"><label for="cmsg">Project details</label><textarea id="cmsg" rows="5" required></textarea><span class="err" data-err="cmsg">Tell me a little about the project.</span></div>
+          <button class="btn gold" type="submit">Send message</button>
+          <div class="form-ok" id="contactOk">✓ Message sent! I'll reply within 24 hours. For urgent projects, WhatsApp me on +234 813 342 6455.</div>
+        </form>
+      </div>
+      <div style="display:flex;gap:14px;margin-top:26px;flex-wrap:wrap">
+        <a class="btn ghost sm" href="https://wa.me/2348133426455" target="_blank" rel="noopener">💬 WhatsApp</a>
+        <a class="btn ghost sm" href="https://nigeriabuy.com.ng" target="_blank" rel="noopener">🌐 nigeriabuy.com.ng</a>
+        <a class="btn ghost sm" href="https://github.com/celisay" target="_blank" rel="noopener">🐙 GitHub</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="page" data-route="demo/estate">
+  <div class="es-nav"><div class="wrap"><span class="es-brand">Lekki Haven</span><a class="btn sm" href="#/demo/estate">Book a stay</a></div></div>
+  <div class="es-hero">
+    <div class="adire"></div>
+    <div class="wrap" style="position:relative">
+      <span class="eyebrow" style="color:var(--gold)">Lagos · Abuja · Ibadan</span>
+      <h1 style="font-size:clamp(30px,5vw,52px)">Find your next home<br>or weekend shortlet</h1>
+      <p class="lead" style="color:rgba(250,248,242,.8);margin-top:14px">Verified listings. Direct booking. No agent wahala.</p>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="es-filters">
+      <div class="field" style="margin:0"><label for="fCity">City</label><select id="fCity"><option value="">All cities</option><option>Lagos</option><option>Abuja</option><option>Ibadan</option></select></div>
+      <div class="field" style="margin:0"><label for="fType">Type</label><select id="fType"><option value="">All types</option><option value="sale">For Sale</option><option value="rent">For Rent</option><option value="short">Shortlet</option></select></div>
+      <div class="field" style="margin:0"><label for="fPrice">Max price</label><select id="fPrice"><option value="">Any price</option><option value="100000">₦100k</option><option value="5000000">₦5m</option><option value="100000000">₦100m</option></select></div>
+      <div class="field" style="margin:0;justify-content:flex-end"><label>&nbsp;</label><button class="btn gold" id="fReset" type="button">Reset filters</button></div>
+    </div>
+    <p style="margin:26px 0 14px;font-family:var(--mono);font-size:13px" id="esCount"></p>
+    <div class="grid g3" id="esGrid" style="margin-bottom:70px"></div>
+  </div>
+</section>
+
+<section class="page" data-route="demo/shop">
+  <div class="sh-nav"><div class="wrap"><span class="sh-brand">Àdìrẹ &amp; Thread</span><button class="cart-btn" id="cartOpen">🛒 Cart (<span id="cartCount">0</span>)</button></div></div>
+  <div class="sh-hero">
+    <div class="adire"></div>
+    <div class="wrap" style="position:relative">
+      <span class="eyebrow" style="color:var(--gold)">New collection · Made in Nigeria</span>
+      <h1 style="font-size:clamp(30px,5vw,52px)">Ankara, tailored<br>for today</h1>
+      <p class="lead" style="color:rgba(250,248,242,.8);margin:14px auto 0">Bold prints. Modern cuts. Shipped nationwide in 3–5 days.</p>
+    </div>
+  </div>
+  <div class="section tight"><div class="wrap">
+    <h2 style="margin-bottom:28px">Shop the collection</h2>
+    <div class="grid g3" id="shGrid"></div>
+  </div></div>
+</section>
+
+<div class="drawer" id="drawer" aria-label="Shopping cart">
+  <div class="drawer-head">Your cart <button class="modal-x" id="cartClose" aria-label="Close cart" style="position:static">×</button></div>
+  <div class="drawer-items" id="drawerItems"><p style="color:rgba(16,22,51,.55)">Your cart is empty. Add something you love.</p></div>
+  <div class="drawer-foot">
+    <div style="display:flex;justify-content:space-between;font-weight:800;font-family:var(--disp);margin-bottom:14px">Total <span id="cartTotal">₦0</span></div>
+    <button class="btn gold" style="width:100%;justify-content:center" id="checkoutBtn">Checkout</button>
+    <div class="form-ok" id="checkoutOk">✓ Order placed! (Demo) You'd receive a WhatsApp confirmation with payment link.</div>
+  </div>
+</div>
+
+<section class="page" data-route="demo/landing">
+  <div class="ld-hero">
+    <div class="adire"></div>
+    <div class="wrap" style="position:relative;max-width:820px">
+      <span class="eyebrow" style="color:var(--gold)">Free training · Limited seats</span>
+      <h1 style="font-size:clamp(30px,5vw,54px);margin:14px 0">Launch a freelance career in 30 days — without quitting your job</h1>
+      <p class="lead" style="color:rgba(250,248,242,.8);margin:0 auto">A step-by-step system for turning skills you already have into paying international clients.</p>
+      <div class="countdown" id="countdown">
+        <div class="cd"><b id="cdH">72</b><span>Hours</span></div>
+        <div class="cd"><b id="cdM">00</b><span>Minutes</span></div>
+        <div class="cd"><b id="cdS">00</b><span>Seconds</span></div>
+      </div>
+      <a class="btn gold" href="#ldForm" onclick="document.getElementById('ldName').focus()">Save my seat →</a>
+    </div>
+  </div>
+  <div class="section tight"><div class="wrap" style="max-width:820px">
+    <h2 style="margin-bottom:22px">Inside the training</h2>
+    <div class="card" style="margin-bottom:34px">
+      <p><span class="check">✓</span>The 3 skills international clients pay Nigerians for right now</p>
+      <p style="margin-top:12px"><span class="check">✓</span>How to build a portfolio in one weekend (even with no clients yet)</p>
+      <p style="margin-top:12px"><span class="check">✓</span>The exact outreach message that gets replies</p>
+      <p style="margin-top:12px"><span class="check">✓</span>Getting paid in Nigeria: platforms, fees and what actually works</p>
+    </div>
+    <h2 style="margin-bottom:18px">Questions, answered</h2>
+    <div id="faq">
+      <div class="faq-item"><button class="faq-q">Is this really free? <span>＋</span></button><div class="faq-a">Yes — the live training is free. There's an optional paid programme afterwards, but the training itself is complete on its own.</div></div>
+      <div class="faq-item"><button class="faq-q">I have no experience. Will it work for me? <span>＋</span></button><div class="faq-a">The training is built for beginners. We start from skill selection, so you don't need an existing portfolio or clients.</div></div>
+      <div class="faq-item"><button class="faq-q">When does it hold? <span>＋</span></button><div class="faq-a">Live this Saturday at 7 PM WAT, with a 48-hour replay for everyone registered.</div></div>
+    </div>
+    <div class="card" style="margin-top:34px" id="ldForm">
+      <h3>Reserve your free seat</h3>
+      <form id="landingForm" novalidate style="margin-top:14px">
+        <div class="field"><label for="ldName">First name</label><input id="ldName" type="text" required><span class="err" data-err="ldName">Please enter your name.</span></div>
+        <div class="field"><label for="ldEmail">Email</label><input id="ldEmail" type="email" required><span class="err" data-err="ldEmail">Please enter a valid email.</span></div>
+        <button class="btn gold" type="submit" style="width:100%;justify-content:center">Register free →</button>
+        <div class="form-ok" id="landingOk">✓ You're registered! Check your email for the training link. (Demo form)</div>
+      </form>
+    </div>
+  </div></div>
+</section>
+
+<section class="page" data-route="demo/dashboard">
+  <div class="db">
+    <aside class="db-side">
+      <span class="sh-brand">PropDesk</span>
+      <button class="db-link active">📊 Overview</button>
+      <button class="db-link">🏠 Properties</button>
+      <button class="db-link">📅 Bookings</button>
+      <button class="db-link">💬 Messages</button>
+      <button class="db-link">⚙️ Settings</button>
+    </aside>
+    <div class="db-main">
+      <h2 style="font-size:24px;margin-bottom:20px">Overview</h2>
+      <div class="grid g4">
+        <div class="db-stat"><span>REVENUE (JUL)</span><b>₦4.2m</b><span class="up">▲ 18% vs June</span></div>
+        <div class="db-stat"><span>BOOKINGS</span><b>37</b><span class="up">▲ 9 new this week</span></div>
+        <div class="db-stat"><span>OCCUPANCY</span><b>82%</b><span class="up">▲ 5 pts</span></div>
+        <div class="db-stat"><span>NEW LEADS</span><b>124</b><span class="up">▲ from Meta ads</span></div>
+      </div>
+      <div class="db-panel">
+        <h3>Revenue — last 8 weeks</h3>
+        <canvas id="revChart" height="120" style="width:100%"></canvas>
+      </div>
+      <div class="grid g2" style="margin-top:0">
+        <div class="db-panel">
+          <h3>Recent bookings</h3>
+          <input type="text" id="tblSearch" placeholder="Search guest or property…" style="width:100%;padding:10px 14px;border:1.5px solid var(--line);border-radius:9px;margin-bottom:12px;font-family:var(--body)">
+          <table id="bkTable"><thead><tr><th>Guest</th><th>Property</th><th>Status</th></tr></thead><tbody></tbody></table>
+        </div>
+        <div class="db-panel">
+          <h3>Live chat — WhatsApp agent</h3>
+          <div class="chat">
+            <div class="chat-log" id="chatLog">
+              <div class="msg in">Hello, is the 2-bed shortlet in Lekki available this weekend?</div>
+              <div class="msg out">Yes! Sat–Sun is open at ₦85,000/night. Want me to hold it for you?</div>
+            </div>
+            <div class="chat-row"><input id="chatInput" placeholder="Type a reply…"><button class="btn sm gold" id="chatSend" type="button">Send</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div class="modal" id="esModal">
+  <div class="modal-box">
+    <button class="modal-x" id="esModalX" aria-label="Close">×</button>
+    <div id="esModalBody"></div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap foot">
+    <div>© 2026 Emmanuel Oloyede · Emma-Visio Enterprises · Lagos, Nigeria</div>
+    <div><a href="https://wa.me/2348133426455" target="_blank" rel="noopener">WhatsApp</a> · <a href="#/contact">Contact</a> · <a href="#/projects">Projects</a></div>
+  </div>
+          </footer>
+          <script>
+const pages = document.querySelectorAll('.page');
+const mainNav = document.getElementById('mainNav');
+const demoBar = document.getElementById('demoBar');
+const navLinks = document.getElementById('navLinks');
+
+function route(){
+  let hash = location.hash.replace(/^#\//,'') || 'home';
+  let found = false;
+  pages.forEach(p=>{
+    const match = p.dataset.route === hash;
+    p.classList.toggle('active', match);
+    if(match) found = true;
+  });
+  if(!found){ hash='home'; pages.forEach(p=>p.classList.toggle('active', p.dataset.route==='home')); }
+  const isDemo = hash.startsWith('demo/');
+  mainNav.style.display = isDemo ? 'none' : 'block';
+  demoBar.style.display = isDemo ? 'block' : 'none';
+  document.querySelectorAll('[data-nav]').forEach(a=>a.classList.toggle('active', a.dataset.nav===hash));
+  navLinks.classList.remove('open');
+  window.scrollTo(0,0);
+  if(hash==='demo/dashboard') drawChart();
+}
+window.addEventListener('hashchange', route);
+document.getElementById('burger').addEventListener('click',()=>navLinks.classList.toggle('open'));
+
+function wireForm(formId, okId, fields){
+  const form = document.getElementById(formId);
+  if(!form) return;
+  form.addEventListener('submit', e=>{
+    e.preventDefault();
+    let ok = true;
+    fields.forEach(id=>{
+      const el = document.getElementById(id);
+      const err = form.querySelector(`[data-err="${id}"]`);
+      const valid = el.type==='email' ? /^\S+@\S+\.\S+$/.test(el.value) : el.value.trim().length>1;
+      if(err) err.classList.toggle('show', !valid);
+      if(!valid) ok = false;
+    });
+    if(ok){
+      document.getElementById(okId).classList.add('show');
+      form.querySelectorAll('input,textarea').forEach(el=>el.value='');
+      setTimeout(()=>document.getElementById(okId).classList.remove('show'), 6000);
+    }
+  });
+}
+wireForm('contactForm','contactOk',['cname','cemail','cmsg']);
+wireForm('landingForm','landingOk',['ldName','ldEmail']);
+
+const listings = [
+  {n:'4-Bed Detached Duplex, Lekki Phase 1', c:'Lagos', t:'sale', p:95000000, e:'🏡', beds:'4 bed · 5 bath', d:'Fully detached duplex with BQ, fitted kitchen and 24/7 estate security. Title: Governor\'s Consent.'},
+  {n:'2-Bed Luxury Shortlet, Victoria Island', c:'Lagos', t:'short', p:85000, e:'🌆', beds:'2 bed · sleeps 4', d:'Ocean-view apartment with fast Wi-Fi, Netflix, backup power and daily housekeeping. Perfect for weekend stays.'},
+  {n:'3-Bed Flat, Wuse 2', c:'Abuja', t:'rent', p:4500000, e:'🏢', beds:'3 bed · 3 bath', d:'Spacious upstairs flat in a serene compound. Annual rent, serviced, with dedicated parking.'},
+  {n:'Studio Shortlet, Bodija', c:'Ibadan', t:'short', p:35000, e:'🛋️', beds:'Studio · sleeps 2', d:'Cosy self-contained studio near UI. Smart TV, kitchenette, inverter power. Great for solo travel.'},
+  {n:'5-Bed Mansion, Maitama', c:'Abuja', t:'sale', p:98000000, e:'🏰', beds:'5 bed · 6 bath', d:'Premium finish with swimming pool, cinema room and landscaped garden in Abuja\'s finest district.'},
+  {n:'Mini Flat, Yaba', c:'Lagos', t:'rent', p:1800000, e:'🏠', beds:'1 bed · 1 bath', d:'Clean mini flat close to tech hubs and UNILAG. Prepaid meter, water running, gated street.'},
+  {n:'3-Bed Terrace, Chevron Drive', c:'Lagos', t:'sale', p:65000000, e:'🏘️', beds:'3 bed · 4 bath', d:'Modern terrace in a secure mini-estate off Chevron Drive. Flexible payment plan available.'},
+  {n:'2-Bed Apartment, Jericho', c:'Ibadan', t:'rent', p:2500000, e:'🌳', beds:'2 bed · 2 bath', d:'Quiet, leafy neighbourhood. Newly renovated, POP ceilings, ample parking.'},
+  {n:'1-Bed Shortlet, Gwarinpa', c:'Abuja', t:'short', p:45000, e:'🛏️', beds:'1 bed · sleeps 2', d:'Stylish apartment with king bed, workspace and 24/7 light. Airport pickup available.'}
+];
+const badgeMap = {sale:['','FOR SALE'], rent:['rent','FOR RENT'], short:['short','SHORTLET']};
+function fmtN(n){ return '₦' + n.toLocaleString('en-NG'); }
+function renderListings(){
+  const c = document.getElementById('fCity').value;
+  const t = document.getElementById('fType').value;
+  const p = document.getElementById('fPrice').value;
+  const grid = document.getElementById('esGrid');
+  const out = listings.filter(l => (!c||l.c===c) && (!t||l.t===t) && (!p||l.p<=+p));
+  document.getElementById('esCount').textContent = out.length + ' PROPERTIES FOUND';
+  grid.innerHTML = out.map((l,i)=>`
+    <div class="card es-card" data-i="${listings.indexOf(l)}" tabindex="0" role="button" aria-label="View ${l.n}">
+      <div class="es-img thumb-indigo">${l.e}</div>
+      <div class="es-body">
+        <span class="badge ${badgeMap[l.t][0]}">${badgeMap[l.t][1]}</span>
+        <h3 style="font-size:16px">${l.n}</h3>
+        <div class="es-meta">${l.beds} · ${l.c}</div>
+        <div class="es-price">${fmtN(l.p)}${l.t==='short'?'<small style="font-size:12px;font-weight:400">/night</small>':l.t==='rent'?'<small style="font-size:12px;font-weight:400">/year</small>':''}</div>
+      </div>
+    </div>`).join('') || '<p>No properties match those filters — try widening your search.</p>';
+}
+['fCity','fType','fPrice'].forEach(id=>document.getElementById(id).addEventListener('change', renderListings));
+document.getElementById('fReset').addEventListener('click', ()=>{
+  ['fCity','fType','fPrice'].forEach(id=>document.getElementById(id).value='');
+  renderListings();
+});
+document.getElementById('esGrid').addEventListener('click', e=>{
+  const card = e.target.closest('.es-card'); if(!card) return;
+  openListing(+card.dataset.i);
+});
+document.getElementById('esGrid').addEventListener('keydown', e=>{
+  if(e.key==='Enter'){ const card = e.target.closest('.es-card'); if(card) openListing(+card.dataset.i); }
+});
+function openListing(i){
+  const l = listings[i];
+  document.getElementById('esModalBody').innerHTML = `
+    <span class="badge ${badgeMap[l.t][0]}">${badgeMap[l.t][1]}</span>
+    <h2 style="font-size:26px;margin:6px 0 4px">${l.e} ${l.n}</h2>
+    <div class="es-meta">${l.beds} · ${l.c}</div>
+    <div class="es-price" style="margin:8px 0 14px">${fmtN(l.p)}</div>
+    <p style="color:rgba(16,22,51,.75);font-size:15px">${l.d}</p>
+    <form id="bkForm" novalidate style="margin-top:20px">
+      <div class="field"><label for="bkName">Your name</label><input id="bkName" required></div>
+      <div class="field"><label for="bkPhone">WhatsApp number</label><input id="bkPhone" required></div>
+      <button class="btn gold" type="submit" style="width:100%;justify-content:center">${l.t==='short'?'Request booking':'Request inspection'}</button>
+      <div class="form-ok" id="bkOk">✓ Request sent! Our agent will contact you on WhatsApp shortly. (Demo)</div>
+    </form>`;
+  document.getElementById('esModal').classList.add('open');
+  document.getElementById('bkForm').addEventListener('submit', e=>{
+    e.preventDefault();
+    if(document.getElementById('bkName').value.trim() && document.getElementById('bkPhone').value.trim()){
+      document.getElementById('bkOk').classList.add('show');
+    }
+  });
+}
+document.getElementById('esModalX').addEventListener('click',()=>document.getElementById('esModal').classList.remove('open'));
+document.getElementById('esModal').addEventListener('click',e=>{ if(e.target.id==='esModal') e.target.classList.remove('open'); });
+renderListings();
+
+const products = [
+  {n:'Ankara Wrap Dress', p:28500, e:'👗', d:'Bold print, adjustable wrap fit'},
+  {n:'Adire Bomber Jacket', p:42000, e:'🧥', d:'Hand-dyed indigo, unisex cut'},
+  {n:'Ankara Two-Piece Set', p:35000, e:'👚', d:'Crop top + palazzo trousers'},
+  {n:'Senator Kaftan', p:38000, e:'🕴️', d:'Premium cashmere blend, tailored'},
+  {n:'Ankara Bucket Hat', p:9500, e:'👒', d:'Reversible print, one size'},
+  {n:'Gele Headwrap Set', p:12000, e:'🎀', d:'Two-tone aso-oke, pre-pleated'}
+];
+let cart = [];
+function renderShop(){
+  document.getElementById('shGrid').innerHTML = products.map((p,i)=>`
+    <div class="card sh-card">
+      <div class="sh-img ${i%2?'thumb-indigo':'thumb-gold'}">${p.e}</div>
+      <div class="sh-body">
+        <h3 style="font-size:17px">${p.n}</h3>
+        <p style="font-size:13px;color:rgba(16,22,51,.6);margin:4px 0 10px">${p.d}</p>
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span class="sh-price">${fmtN(p.p)}</span>
+          <button class="btn sm" data-add="${i}">Add to cart</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+function renderCart(){
+  document.getElementById('cartCount').textContent = cart.reduce((s,c)=>s+c.q,0);
+  const box = document.getElementById('drawerItems');
+  if(!cart.length){ box.innerHTML = '<p style="color:rgba(16,22,51,.55)">Your cart is empty. Add something you love.</p>'; }
+  else box.innerHTML = cart.map((c,i)=>`
+    <div class="d-item">
+      <div><b>${c.n}</b><br><small>${fmtN(c.p)} each</small></div>
+      <div class="qty"><button data-q="${i},-1" aria-label="Decrease">−</button><b>${c.q}</b><button data-q="${i},1" aria-label="Increase">＋</button></div>
+      <button data-rm="${i}" aria-label="Remove">✕</button>
+    </div>`).join('');
+  document.getElementById('cartTotal').textContent = fmtN(cart.reduce((s,c)=>s+c.p*c.q,0));
+}
+document.addEventListener('click', e=>{
+  if(e.target.dataset.add !== undefined){
+    const p = products[+e.target.dataset.add];
+    const ex = cart.find(c=>c.n===p.n);
+    ex ? ex.q++ : cart.push({...p, q:1});
+    renderCart();
+    document.getElementById('drawer').classList.add('open');
+  }
+  if(e.target.dataset.q){
+    const [i,d] = e.target.dataset.q.split(',').map(Number);
+    cart[i].q += d;
+    if(cart[i].q<1) cart.splice(i,1);
+    renderCart();
+  }
+  if(e.target.dataset.rm !== undefined){ cart.splice(+e.target.dataset.rm,1); renderCart(); }
+});
+document.getElementById('cartOpen').addEventListener('click',()=>document.getElementById('drawer').classList.add('open'));
+document.getElementById('cartClose').addEventListener('click',()=>document.getElementById('drawer').classList.remove('open'));
+document.getElementById('checkoutBtn').addEventListener('click',()=>{
+  if(!cart.length) return;
+  document.getElementById('checkoutOk').classList.add('show');
+  cart = []; renderCart();
+  setTimeout(()=>{document.getElementById('checkoutOk').classList.remove('show');document.getElementById('drawer').classList.remove('open');},3500);
+});
+renderShop(); renderCart();
+
+const deadline = Date.now() + 72*3600*1000;
+function tick(){
+  let s = Math.max(0, Math.floor((deadline - Date.now())/1000));
+  document.getElementById('cdH').textContent = String(Math.floor(s/3600)).padStart(2,'0');
+  document.getElementById('cdM').textContent = String(Math.floor(s%3600/60)).padStart(2,'0');
+  document.getElementById('cdS').textContent = String(s%60).padStart(2,'0');
+}
+setInterval(tick, 1000); tick();
+document.getElementById('faq').addEventListener('click', e=>{
+  const q = e.target.closest('.faq-q'); if(!q) return;
+  const item = q.parentElement;
+  const wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(f=>f.classList.remove('open'));
+  if(!wasOpen) item.classList.add('open');
+});
+
+const bookings = [
+  ['Chioma A.','2-Bed Shortlet, VI','ok','Confirmed'],
+  ['Tunde B.','Studio, Bodija','pend','Pending'],
+  ['Sarah O.','1-Bed, Gwarinpa','ok','Confirmed'],
+  ['Musa K.','2-Bed Shortlet, VI','off','Cancelled'],
+  ['Blessing E.','Mini Flat, Yaba','ok','Confirmed'],
+  ['David N.','Studio, Bodija','pend','Pending']
+];
+function renderTable(q=''){
+  const tb = document.querySelector('#bkTable tbody');
+  tb.innerHTML = bookings
+    .filter(b => (b[0]+b[1]).toLowerCase().includes(q.toLowerCase()))
+    .map(b=>`<tr><td>${b[0]}</td><td>${b[1]}</td><td><span class="pill ${b[2]}">${b[3]}</span></td></tr>`).join('')
+    || '<tr><td colspan="3">No bookings match that search.</td></tr>';
+}
+document.getElementById('tblSearch').addEventListener('input', e=>renderTable(e.target.value));
+renderTable();
+
+function drawChart(){
+  const cv = document.getElementById('revChart');
+  const dpr = window.devicePixelRatio || 1;
+  const w = cv.clientWidth, h = 180;
+  cv.width = w*dpr; cv.height = h*dpr;
+  const ctx = cv.getContext('2d'); ctx.scale(dpr,dpr);
+  const data = [1.8, 2.1, 1.9, 2.6, 2.4, 3.1, 3.6, 4.2];
+  const max = 4.6, pad = 28;
+  const x = i => pad + i*(w-2*pad)/(data.length-1);
+  const y = v => h - pad - (v/max)*(h-2*pad);
+  ctx.clearRect(0,0,w,h);
+  ctx.strokeStyle = 'rgba(16,22,51,.08)';
+  for(let g=1;g<=4;g++){ ctx.beginPath(); ctx.moveTo(pad, y(g)); ctx.lineTo(w-pad, y(g)); ctx.stroke(); }
+  const grad = ctx.createLinearGradient(0,0,0,h);
+  grad.addColorStop(0,'rgba(58,75,181,.25)'); grad.addColorStop(1,'rgba(58,75,181,0)');
+  ctx.beginPath(); ctx.moveTo(x(0), y(data[0]));
+  data.forEach((v,i)=>ctx.lineTo(x(i), y(v)));
+  ctx.lineTo(x(data.length-1), h-pad); ctx.lineTo(x(0), h-pad); ctx.closePath();
+  ctx.fillStyle = grad; ctx.fill();
+  ctx.beginPath(); ctx.moveTo(x(0), y(data[0]));
+  data.forEach((v,i)=>ctx.lineTo(x(i), y(v)));
+  ctx.strokeStyle = '#232F72'; ctx.lineWidth = 2.5; ctx.stroke();
+  data.forEach((v,i)=>{
+    ctx.beginPath(); ctx.arc(x(i), y(v), 4, 0, 7);
+    ctx.fillStyle = '#D9A62E'; ctx.fill();
+    ctx.strokeStyle = '#fff'; ctx.lineWidth = 2; ctx.stroke();
+  });
+  ctx.fillStyle = 'rgba(16,22,51,.5)'; ctx.font = '11px "Space Mono"';
+  data.forEach((v,i)=>{ if(i%2===0||i===data.length-1) ctx.fillText('₦'+v+'m', x(i)-14, y(v)-12); });
+}
+window.addEventListener('resize', ()=>{ if(location.hash.includes('dashboard')) drawChart(); });
+
+const replies = ['Perfect, I\'ve placed a 2-hour hold on it for you. 🎉','Great — should I send the payment link to this number?','Noted! Check-in is 2 PM, checkout 11 AM. Anything else?'];
+let ri = 0;
+function sendChat(){
+  const inp = document.getElementById('chatInput');
+  const val = inp.value.trim(); if(!val) return;
+  const log = document.getElementById('chatLog');
+  log.insertAdjacentHTML('beforeend', `<div class="msg out"></div>`);
+  log.lastElementChild.textContent = val;
+  inp.value = '';
+  setTimeout(()=>{
+    log.insertAdjacentHTML('beforeend', `<div class="msg in">${replies[ri++ % replies.length]}</div>`);
+    log.scrollTop = log.scrollHeight;
+  }, 800);
+  log.scrollTop = log.scrollHeight;
+}
+document.getElementById('chatSend').addEventListener('click', sendChat);
+document.getElementById('chatInput').addEventListener('keydown', e=>{ if(e.key==='Enter') sendChat(); });
+
+route();
+</script>
+</body>
+  </html>
